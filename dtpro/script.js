@@ -1,4 +1,3 @@
-
 let lastLocation = '';
 let lastDestination = '';
 
@@ -45,42 +44,47 @@ document.getElementById('busForm').addEventListener('submit', function(event) {
     lastLocation = location;
     lastDestination = destination;
 
-    // Simulated bus data
+    // Simulated bus data with live locations
     const busData = [
         { 
             number: '101', 
             occupancy: '30%', 
             occupancyLevel: 'low',
             arrivalTime: '5 mins', 
-            imageUrl: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800'
+            imageUrl: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800',
+            liveLocation: 'https://maps.app.goo.gl/ZekpH1HyowndQefV6'
         },
         { 
             number: '102', 
             occupancy: '65%', 
             occupancyLevel: 'medium',
             arrivalTime: '10 mins', 
-            imageUrl: 'https://images.unsplash.com/photo-1596584247608-8cbb4b3f6297?w=800'
+            imageUrl: 'https://images.unsplash.com/photo-1596584247608-8cbb4b3f6297?w=800',
+            liveLocation: 'https://maps.app.goo.gl/HwREW9ZDw5QsgFZUA'
         },
         { 
             number: '103', 
             occupancy: '85%', 
             occupancyLevel: 'high',
             arrivalTime: '2 mins', 
-            imageUrl: 'https://images.unsplash.com/photo-1600320402673-4a969958d325?w=800'
+            imageUrl: 'https://images.unsplash.com/photo-1600320402673-4a969958d325?w=800',
+            liveLocation: 'https://maps.app.goo.gl/kyQb2FSXZb3BH2uS7'
         },
         { 
             number: '104', 
             occupancy: '45%', 
             occupancyLevel: 'medium',
             arrivalTime: '8 mins', 
-            imageUrl: 'https://images.unsplash.com/photo-1597256123772-6694d69509c4?w=800'
+            imageUrl: 'https://images.unsplash.com/photo-1597256123772-6694d69509c4?w=800',
+            liveLocation: 'https://maps.app.goo.gl/9kQqGnXksMovm9uz5'
         },
         { 
             number: '105', 
             occupancy: '20%', 
             occupancyLevel: 'low',
             arrivalTime: '15 mins', 
-            imageUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800'
+            imageUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800',
+            liveLocation: 'https://maps.app.goo.gl/2vp9HcuCT8etXjpB7'
         }
     ];
 
@@ -102,7 +106,7 @@ document.getElementById('busForm').addEventListener('submit', function(event) {
             <div class="arrival-time">
                 <span>Arrives in: ${bus.arrivalTime}</span>
             </div>
-            <button class="track-button" onclick="trackBus('${bus.imageUrl}')">
+            <button class="track-button" onclick="trackBus('${bus.imageUrl}', '${bus.liveLocation}')">
                 Track Live Location
             </button>
         `;
@@ -116,10 +120,13 @@ document.getElementById('busForm').addEventListener('submit', function(event) {
     });
 });
 
-function trackBus(imageUrl) {
+function trackBus(imageUrl, liveLocation) {
     const liveTrackContainer = document.getElementById('liveTrackImage');
     document.getElementById('selectedBusImage').src = imageUrl;
     liveTrackContainer.style.display = 'block';
+    
+    // Open Google Maps location in a new tab
+    window.open(liveLocation, '_blank');
 }
 
 function closeLiveTrack() {
